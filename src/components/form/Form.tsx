@@ -6,16 +6,24 @@ import { FORM_INPUTS } from './constants';
 import Button from '../common/button/Button';
 import { useAppDispatch } from '../../hooks/useRTK';
 import { addTodo } from '../../store/slice/todoSlice';
+import { FormIds } from '../../types/enums';
 
 export default function Form() {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>();
   const dispatch = useAppDispatch();
+
+  const handleReset = () => {
+    reset({
+      [FormIds.titleValue]: '',
+      [FormIds.contentsValue]: '',
+    });
+  };
 
   const handleAdd = ({ title, contents }: InputValue) => {
     //TODO: validation check
     dispatch(addTodo({ title, contents }));
+    handleReset();
   };
-  const handleReset = () => {};
 
   const handleTodoSubmit: SubmitHandler<Inputs> = (value) => {
     console.log(value);
@@ -25,10 +33,12 @@ export default function Form() {
   const FORM_BUTTONS = [
     {
       text: 'ADD',
+      isSubmit: true,
     },
     {
       text: 'RESET',
       handler: handleReset,
+      isSubmit: false,
     },
   ];
 
@@ -46,6 +56,7 @@ export default function Form() {
       key={`button_${button.text}`}
       text={button.text}
       handler={button.handler}
+      isSubmit={button.isSubmit}
     />
   ));
 
