@@ -30,7 +30,6 @@ export default function Form() {
   };
 
   const handleTodoSubmit: SubmitHandler<Inputs> = (value) => {
-    console.log(value);
     handleAdd({ title: value.titleValue, contents: value.contentsValue });
   };
 

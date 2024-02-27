@@ -11,16 +11,21 @@ export default function List({ sectionInfo }: Props) {
   const { todos } = useTodo();
 
   const TODO_CARD = todos
-    .filter((todo) => !sectionInfo === todo.isDone)
+    .filter((todo) => !!sectionInfo === todo.isDone)
     .map((todo) => <Card key={todo.id} todo={todo} />);
+
+  const NOT_TODO_MESSAGE = (
+    <h2>
+      {sectionInfo
+        ? 'Please complete todays tasks'
+        : 'Please register todays tasks'}
+    </h2>
+  );
 
   return (
     <section>
       <h2>{sectionInfo ? 'Done' : 'Not Done'}</h2>
-      <ul>
-        {/* TODO: 리스트 아이템 컴포넌트 분리, 삭제버튼 및 로직 추가, 업데이트 로직 추가 */}
-        {TODO_CARD}
-      </ul>
+      {TODO_CARD.length ? <ul>{TODO_CARD}</ul> : NOT_TODO_MESSAGE}
     </section>
   );
 }

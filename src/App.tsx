@@ -8,8 +8,8 @@ function App() {
     <div>
       <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
       <Form />
-      <List sectionInfo={SectionType.notDone} />
       <List sectionInfo={SectionType.done} />
+      <List sectionInfo={SectionType.notDone} />
     </div>
   );
 }
