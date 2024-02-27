@@ -1,17 +1,11 @@
 import React from 'react';
+import Form from './components/form/Form';
 
 function App() {
   return (
     <div>
       <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
-
-      <form>
-        <input />
-        <input />
-        <button>초기화</button>
-        <button>입력</button>
-      </form>
-
+      <Form />
       <section>
         <h2>NOT DONE</h2>
         <ul>
