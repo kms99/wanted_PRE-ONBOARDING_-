@@ -14,8 +14,8 @@ export default function Form() {
 
   const handleReset = () => {
     reset({
-      [FormIds.titleValue]: '',
-      [FormIds.contentsValue]: '',
+      [FormIds.TITLE_VALUE]: '',
+      [FormIds.CONTENTS_VALUE]: '',
     });
   };
 
