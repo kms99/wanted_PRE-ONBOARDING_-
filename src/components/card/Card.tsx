@@ -5,6 +5,8 @@ import useTodo from '../../hooks/useTodo';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { FormIds } from '../../types/enums';
+import { EDIT_MODE_INPUTS_INFO } from './contants';
+import { inputValidationCheck } from '../../utils';
 
 interface Props {
   todo: Todo;
@@ -12,12 +14,38 @@ interface Props {
 
 export default function Card({ todo }: Props) {
   const { handleDeleteTodo, handleUpdateTodo, handleEditTodo } = useTodo();
-  const { register, handleSubmit } = useForm<Inputs>();
+
+  const { register, handleSubmit, setValue } = useForm<Inputs>();
 
   const [toggleEditMode, setToggleEditMode] = useState<boolean>(false);
 
+  const handleEditSubmit: SubmitHandler<Inputs> = (value) => {
+    if (
+      !inputValidationCheck({
+        title: value.titleValue,
+        contents: value.contentsValue,
+      })
+    ) {
+      alert('모든 값을 입력하세요');
+      return;
+    }
+
+    handleEditTodo({
+      id: todo.id,
+      title: value.titleValue,
+      contents: value.contentsValue,
+    });
+    handleToggleEditMode();
+  };
+
   const handleToggleEditMode = () => {
-    setToggleEditMode((prevState) => !prevState);
+    setToggleEditMode((prevState) => {
+      if (!prevState) {
+        setValue(FormIds.titleValue, todo.title);
+        setValue(FormIds.contentsValue, todo.contents);
+      }
+      return !prevState;
+    });
   };
 
   const CARD_BUTTONS_INFO = [
@@ -66,29 +94,15 @@ export default function Card({ todo }: Props) {
     />
   ));
 
-  const handleEditSubmit: SubmitHandler<Inputs> = (value) => {
-    handleEditTodo({
-      id: todo.id,
-      title: value.titleValue,
-      contents: value.contentsValue,
-    });
-    handleToggleEditMode();
-  };
+  const EDIT_MODE_INPUTS = EDIT_MODE_INPUTS_INFO.map((input) => (
+    <Input formId={input} formRegister={register} key={input} />
+  ));
 
   if (toggleEditMode) {
     return (
       <li key={todo.id}>
         <form onSubmit={handleSubmit(handleEditSubmit)}>
-          <Input
-            formId={FormIds.titleValue}
-            formRegister={register}
-            key={FormIds.titleValue}
-          />
-          <Input
-            formId={FormIds.contentsValue}
-            formRegister={register}
-            key={FormIds.contentsValue}
-          />
+          {EDIT_MODE_INPUTS}
           <div>{EDIT_MODE_BUTTONS}</div>
         </form>
       </li>

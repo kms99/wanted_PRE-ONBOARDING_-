@@ -6,6 +6,7 @@ import { FORM_INPUTS } from './constants';
 import Button from '../common/button/Button';
 import { FormIds } from '../../types/enums';
 import useTodo from '../../hooks/useTodo';
+import { inputValidationCheck } from '../../utils';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -19,7 +20,11 @@ export default function Form() {
   };
 
   const handleAdd = ({ title, contents }: InputValue) => {
-    //TODO: validation check
+    if (!inputValidationCheck({ title, contents })) {
+      alert('모든 값을 입력하세요');
+      return;
+    }
+
     handleAddTodo({ title, contents });
     handleReset();
   };
