@@ -41,8 +41,8 @@ export default function Card({ todo }: Props) {
   const handleToggleEditMode = () => {
     setToggleEditMode((prevState) => {
       if (!prevState) {
-        setValue(FormIds.titleValue, todo.title);
-        setValue(FormIds.contentsValue, todo.contents);
+        setValue(FormIds.TITLE_VALUE, todo.title);
+        setValue(FormIds.CONTENTS_VALUE, todo.contents);
       }
       return !prevState;
     });

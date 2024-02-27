@@ -1,11 +1,11 @@
 enum FormIds {
-  titleValue = 'titleValue',
-  contentsValue = 'contentsValue',
+  TITLE_VALUE = 'titleValue',
+  CONTENTS_VALUE = 'contentsValue',
 }
 
 enum SectionType {
-  done,
-  notDone,
+  DONE,
+  NOT_DONE,
 }
 
 export { FormIds, SectionType };
