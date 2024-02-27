@@ -1,17 +1,18 @@
 import React from 'react';
 import { SectionType } from '../../types/enums';
-import { useAppSelector } from '../../hooks/useRTK';
 import Card from '../card/Card';
+import useTodo from '../../hooks/useTodo';
 
 interface Props {
   sectionInfo: SectionType;
 }
-export default function List({ sectionInfo }: Props) {
-  const todos = useAppSelector((state) => state.todoSlice.todos).filter(
-    (todo) => !sectionInfo === todo.isDone,
-  );
 
-  const TODO_CARD = todos.map((todo) => <Card key={todo.id} todo={todo} />);
+export default function List({ sectionInfo }: Props) {
+  const { todos } = useTodo();
+
+  const TODO_CARD = todos
+    .filter((todo) => !sectionInfo === todo.isDone)
+    .map((todo) => <Card key={todo.id} todo={todo} />);
 
   return (
     <section>

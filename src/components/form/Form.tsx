@@ -4,13 +4,12 @@ import Input from '../common/input/Input';
 import { InputValue, Inputs } from '../../types/types';
 import { FORM_INPUTS } from './constants';
 import Button from '../common/button/Button';
-import { useAppDispatch } from '../../hooks/useRTK';
-import { addTodo } from '../../store/slice/todoSlice';
 import { FormIds } from '../../types/enums';
+import useTodo from '../../hooks/useTodo';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
-  const dispatch = useAppDispatch();
+  const { handleAddTodo } = useTodo();
 
   const handleReset = () => {
     reset({
@@ -21,7 +20,7 @@ export default function Form() {
 
   const handleAdd = ({ title, contents }: InputValue) => {
     //TODO: validation check
-    dispatch(addTodo({ title, contents }));
+    handleAddTodo({ title, contents });
     handleReset();
   };
 

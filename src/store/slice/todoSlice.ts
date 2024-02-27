@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo, InputValue } from '../../types/types';
+import { Todo, InputValue, UpdateValue } from '../../types/types';
 
 export interface TodoInitialState {
   todos: Todo[];
@@ -19,7 +19,6 @@ export const todoSlice = createSlice({
         ...state.todos,
       ];
     },
-
     updateTodo: (state, action: PayloadAction<number>) => {
       state.todos = state.todos.map((todo) => {
         return todo.id === action.payload
@@ -27,8 +26,24 @@ export const todoSlice = createSlice({
           : { ...todo };
       });
     },
+    deleteTodo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
+    editTodo: (state, action: PayloadAction<UpdateValue>) => {
+      state.todos = state.todos.map((todo) => {
+        if (todo.id === action.payload.id) {
+          return {
+            ...todo,
+            title: action.payload.title,
+            contents: action.payload.contents,
+          };
+        } else {
+          return { ...todo };
+        }
+      });
+    },
   },
 });
 
-export const { addTodo, updateTodo } = todoSlice.actions;
+export const { addTodo, updateTodo, deleteTodo, editTodo } = todoSlice.actions;
 export default todoSlice.reducer;

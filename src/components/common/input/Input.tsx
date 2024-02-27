@@ -6,7 +6,7 @@ import { Inputs } from '../../../types/types';
 interface Props {
   formRegister: UseFormRegister<Inputs>;
   formId: FormIds;
-  placeholder: string;
+  placeholder?: string;
 }
 
 export default function Input({ formRegister, formId, placeholder }: Props) {
