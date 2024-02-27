@@ -1,14 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Todo, InputValue } from '../../types/types';
 
-const initialState = {
+export interface TodoInitialState {
+  todo: Todo[];
+}
+
+const initialState: TodoInitialState = {
   todo: [],
 };
 
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
-  reducers: {},
+  reducers: {
+    addTodo: (state, action: PayloadAction<InputValue>) => {
+      state.todo = [{ ...action.payload, isDone: false }, ...state.todo];
+    },
+  },
 });
 
-export const {} = todoSlice.actions;
+export const { addTodo } = todoSlice.actions;
 export default todoSlice.reducer;

@@ -3,4 +3,12 @@ type Inputs = {
   contentsValue: string;
 };
 
-export type { Inputs };
+type Todo = {
+  title: string;
+  contents: string;
+  isDone: boolean;
+};
+
+type InputValue = Omit<Todo, 'isDone'>;
+
+export type { Inputs, Todo, InputValue };
