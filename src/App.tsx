@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
+
+      <form>
+        <input />
+        <input />
+        <button>초기화</button>
+        <button>입력</button>
+      </form>
+
+      <section>
+        <h2>NOT DONE</h2>
+        <ul>
+          <li>
+            <h2>카드겠지?</h2>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>DONE</h2>
+        <ul>
+          <li>
+            <h2>카드겠지?</h2>
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
