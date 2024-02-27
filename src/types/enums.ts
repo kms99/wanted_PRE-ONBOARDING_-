@@ -3,4 +3,9 @@ enum FormIds {
   contentsValue = 'contentsValue',
 }
 
-export { FormIds };
+enum SectionType {
+  done,
+  notDone,
+}
+
+export { FormIds, SectionType };

@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Todo, InputValue } from '../../types/types';
 
 export interface TodoInitialState {
-  todo: Todo[];
+  todos: Todo[];
 }
 
 const initialState: TodoInitialState = {
-  todo: [],
+  todos: [],
 };
 
 export const todoSlice = createSlice({
@@ -14,10 +14,21 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<InputValue>) => {
-      state.todo = [{ ...action.payload, isDone: false }, ...state.todo];
+      state.todos = [
+        { ...action.payload, isDone: false, id: Date.now() },
+        ...state.todos,
+      ];
+    },
+
+    updateTodo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.map((todo) => {
+        return todo.id === action.payload
+          ? { ...todo, isDone: !todo.isDone }
+          : { ...todo };
+      });
     },
   },
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, updateTodo } = todoSlice.actions;
 export default todoSlice.reducer;
