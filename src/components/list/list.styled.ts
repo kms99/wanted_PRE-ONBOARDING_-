@@ -2,6 +2,13 @@ import { styled } from 'styled-components';
 
 export const ListContainer = styled.section`
   width: 100%;
+
+  & > h2 {
+    font-size: 3rem;
+    color: var(--sub-color);
+    font-weight: bold;
+    text-align: center;
+  }
 `;
 export const List = styled.ul`
   width: 100%;
