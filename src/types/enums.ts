@@ -3,9 +3,16 @@ enum FormIds {
   CONTENTS_VALUE = 'contentsValue',
 }
 
-enum SectionType {
-  DONE,
-  NOT_DONE,
+enum ButtonStyle {
+  'EMPTY',
+  'FILL',
+  'NAV',
+  'ACTIVE_NAV',
 }
 
-export { FormIds, SectionType };
+enum ThemeType {
+  'dark',
+  'light',
+}
+
+export { FormIds, ButtonStyle, ThemeType };

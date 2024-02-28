@@ -1,31 +1,46 @@
 import React from 'react';
-import { SectionType } from '../../types/enums';
 import Card from '../card/Card';
 import useTodo from '../../hooks/useTodo';
+import { useAppSelector } from '../../hooks/useRTK';
+import * as St from './list.styled';
 
-interface Props {
-  sectionInfo: SectionType;
-}
-
-export default function List({ sectionInfo }: Props) {
+export default function List() {
   const { todos } = useTodo();
+  const currentNav = useAppSelector((state) => state.navSlice.currentNav);
+
+  const getNotTodoMessage = () => {
+    switch (currentNav) {
+      case 'ALL':
+        return 'Please register a new task';
+      case 'DONE':
+        return 'Finish the scheduled tasks!';
+      case 'NOT_DONE':
+        return 'There are no tasks left to do';
+      default:
+        return true;
+    }
+  };
 
   const TODO_CARD = todos
-    .filter((todo) => !!sectionInfo === todo.isDone)
+    .filter((todo) => {
+      switch (currentNav) {
+        case 'ALL':
+          return true;
+        case 'DONE':
+          return todo.isDone;
+        case 'NOT_DONE':
+          return !todo.isDone;
+        default:
+          return true;
+      }
+    })
     .map((todo) => <Card key={todo.id} todo={todo} />);
 
-  const NOT_TODO_MESSAGE = (
-    <h2>
-      {sectionInfo
-        ? 'Please complete todays tasks'
-        : 'Please register todays tasks'}
-    </h2>
-  );
+  const NOT_TODO_MESSAGE = <h2>{getNotTodoMessage()}</h2>;
 
   return (
-    <section>
-      <h2>{sectionInfo ? 'Done' : 'Not Done'}</h2>
-      {TODO_CARD.length ? <ul>{TODO_CARD}</ul> : NOT_TODO_MESSAGE}
-    </section>
+    <St.ListContainer>
+      {TODO_CARD.length ? <St.List>{TODO_CARD}</St.List> : NOT_TODO_MESSAGE}
+    </St.ListContainer>
   );
 }

@@ -1,16 +1,18 @@
 import React from 'react';
 import Form from './components/form/Form';
 import List from './components/list/List';
-import { SectionType } from './types/enums';
+import Nav from './components/nav/Nav';
+import Header from './components/header/Header';
+import * as St from './app.styled';
 
 function App() {
   return (
-    <div>
-      <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
+    <St.Container>
+      <Header />
       <Form />
-      <List sectionInfo={SectionType.DONE} />
-      <List sectionInfo={SectionType.NOT_DONE} />
-    </div>
+      <Nav />
+      <List />
+    </St.Container>
   );
 }
 

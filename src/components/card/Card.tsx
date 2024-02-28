@@ -4,9 +4,10 @@ import Button from '../common/button/Button';
 import useTodo from '../../hooks/useTodo';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../common/input/Input';
-import { FormIds } from '../../types/enums';
-import { EDIT_MODE_INPUTS_INFO } from './contants';
+import { ButtonStyle, FormIds } from '../../types/enums';
 import { inputValidationCheck } from '../../utils';
+import TextArea from '../common/textarea/TextArea';
+import * as St from './card.styled';
 
 interface Props {
   todo: Todo;
@@ -50,29 +51,38 @@ export default function Card({ todo }: Props) {
 
   const CARD_BUTTONS_INFO = [
     {
-      id: `${todo.id}_isDone`,
-      text: todo.isDone ? 'Cancel Done' : 'Done',
-      handler: () => handleUpdateTodo(todo.id),
+      id: `${todo.id}_edit`,
+      text: 'Edit',
+      handler: handleToggleEditMode,
+      style: ButtonStyle.EMPTY,
     },
     {
       id: `${todo.id}_delete`,
-      text: 'delete',
+      text: 'Delete',
       handler: () => handleDeleteTodo(todo.id),
+      style: ButtonStyle.EMPTY,
     },
-    { id: `${todo.id}_edit`, text: 'edit', handler: handleToggleEditMode },
+    {
+      id: `${todo.id}_isDone`,
+      text: todo.isDone ? 'Cancel Done' : 'Done',
+      handler: () => handleUpdateTodo(todo.id),
+      style: ButtonStyle.FILL,
+    },
   ];
 
   const CARD_EDIT_MODE_BUTTONS_INFO = [
-    {
-      isSubmit: true,
-      id: `${todo.id}_editSave`,
-      text: 'Save',
-    },
     {
       isSubmit: false,
       id: `${todo.id}_editCancel`,
       text: 'Cancel',
       handler: handleToggleEditMode,
+      style: ButtonStyle.EMPTY,
+    },
+    {
+      isSubmit: true,
+      id: `${todo.id}_editSave`,
+      text: 'Save',
+      style: ButtonStyle.FILL,
     },
   ];
 
@@ -82,6 +92,7 @@ export default function Card({ todo }: Props) {
       isSubmit={false}
       text={button.text}
       handler={button.handler}
+      btnStyle={button.style}
     />
   ));
 
@@ -91,29 +102,27 @@ export default function Card({ todo }: Props) {
       isSubmit={button.isSubmit}
       text={button.text}
       handler={button.handler}
+      btnStyle={button.style}
     />
-  ));
-
-  const EDIT_MODE_INPUTS = EDIT_MODE_INPUTS_INFO.map((input) => (
-    <Input formId={input} formRegister={register} key={input} />
   ));
 
   if (toggleEditMode) {
     return (
-      <li key={todo.id}>
+      <St.CardItem key={todo.id}>
         <form onSubmit={handleSubmit(handleEditSubmit)}>
-          {EDIT_MODE_INPUTS}
+          <Input formId={FormIds.TITLE_VALUE} formRegister={register} />
+          <TextArea formId={FormIds.CONTENTS_VALUE} formRegister={register} />
           <div>{EDIT_MODE_BUTTONS}</div>
         </form>
-      </li>
+      </St.CardItem>
     );
   } else {
     return (
-      <li key={todo.id}>
+      <St.CardItem key={todo.id}>
         <h2>{todo.title}</h2>
         <p>{todo.contents}</p>
         <div>{NOT_EDIT_MODE_BUTTONS}</div>
-      </li>
+      </St.CardItem>
     );
   }
 }

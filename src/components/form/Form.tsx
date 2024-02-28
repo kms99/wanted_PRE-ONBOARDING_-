@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { InputValue, Inputs } from '../../types/types';
-import { FORM_INPUTS } from './constants';
 import Button from '../common/button/Button';
-import { FormIds } from '../../types/enums';
+import { FormIds, ButtonStyle } from '../../types/enums';
 import useTodo from '../../hooks/useTodo';
 import { inputValidationCheck } from '../../utils';
+import TextArea from '../common/textarea/TextArea';
+import * as St from './form.styled';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const { handleAddTodo } = useTodo();
+  const [toggleForm, setToggleForm] = useState<boolean>(false);
+  const [buttonMessage, setButtonMessage] = useState<string>('Open');
+  const isFirstRun = useRef(true);
 
   const handleReset = () => {
     reset({
@@ -33,26 +37,31 @@ export default function Form() {
     handleAdd({ title: value.titleValue, contents: value.contentsValue });
   };
 
+  const handleToggleForm = () => {
+    setToggleForm((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    setTimeout(() => setButtonMessage(toggleForm ? 'CLOSE' : 'ADD'), 450);
+  }, [toggleForm]);
+
   const FORM_BUTTONS = [
-    {
-      text: 'ADD',
-      isSubmit: true,
-    },
     {
       text: 'RESET',
       handler: handleReset,
       isSubmit: false,
+      style: ButtonStyle.EMPTY,
+    },
+    {
+      text: 'ADD',
+      isSubmit: true,
+      style: ButtonStyle.FILL,
     },
   ];
-
-  const INPUTS = FORM_INPUTS.map((input) => (
-    <Input
-      key={input.formId}
-      formRegister={register}
-      placeholder={input.placeholder}
-      formId={input.formId}
-    />
-  ));
 
   const BUTTONS = FORM_BUTTONS.map((button) => (
     <Button
@@ -60,13 +69,30 @@ export default function Form() {
       text={button.text}
       handler={button.handler}
       isSubmit={button.isSubmit}
+      btnStyle={button.style}
     />
   ));
 
   return (
-    <form onSubmit={handleSubmit(handleTodoSubmit)}>
-      {INPUTS}
-      <div>{BUTTONS}</div>
-    </form>
+    <St.FormContainer>
+      <St.ToggleButton onClick={handleToggleForm} $isOpen={toggleForm}>
+        <div />
+        <span>{buttonMessage}</span>
+      </St.ToggleButton>
+
+      <St.Form onSubmit={handleSubmit(handleTodoSubmit)} $isOpen={toggleForm}>
+        <Input
+          formId={FormIds.TITLE_VALUE}
+          formRegister={register}
+          placeholder="title (1~12)"
+        />
+        <TextArea
+          formId={FormIds.CONTENTS_VALUE}
+          formRegister={register}
+          placeholder="contents"
+        />
+        <div>{BUTTONS}</div>
+      </St.Form>
+    </St.FormContainer>
   );
 }
