@@ -14,4 +14,6 @@ type InputValue = Omit<Todo, 'isDone' | 'id'>;
 
 type UpdateValue = Omit<Todo, 'isDone'>;
 
-export type { Inputs, Todo, InputValue, UpdateValue };
+type NavType = 'ALL' | 'DONE' | 'NOT_DONE';
+
+export type { Inputs, Todo, InputValue, UpdateValue, NavType };

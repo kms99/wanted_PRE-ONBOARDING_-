@@ -7,11 +7,20 @@ interface Props {
   sectionInfo: SectionType;
 }
 
-export default function List({ sectionInfo }: Props) {
+export default function List() {
   const { todos } = useTodo();
 
   const TODO_CARD = todos
-    .filter((todo) => !!sectionInfo === todo.isDone)
+    .filter((todo) => {
+      switch (sectionInfo) {
+        case 0:
+          return true;
+        case 1:
+          return true;
+        default:
+          return true;
+      }
+    })
     .map((todo) => <Card key={todo.id} todo={todo} />);
 
   const NOT_TODO_MESSAGE = (
@@ -24,7 +33,6 @@ export default function List({ sectionInfo }: Props) {
 
   return (
     <section>
-      <h2>{sectionInfo ? 'Done' : 'Not Done'}</h2>
       {TODO_CARD.length ? <ul>{TODO_CARD}</ul> : NOT_TODO_MESSAGE}
     </section>
   );
