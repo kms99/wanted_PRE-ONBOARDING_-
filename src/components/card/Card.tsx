@@ -5,8 +5,8 @@ import useTodo from '../../hooks/useTodo';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { FormIds } from '../../types/enums';
-import { EDIT_MODE_INPUTS_INFO } from './contants';
 import { inputValidationCheck } from '../../utils';
+import TextArea from '../common/textarea/TextArea';
 
 interface Props {
   todo: Todo;
@@ -94,15 +94,14 @@ export default function Card({ todo }: Props) {
     />
   ));
 
-  const EDIT_MODE_INPUTS = EDIT_MODE_INPUTS_INFO.map((input) => (
-    <Input formId={input} formRegister={register} key={input} />
-  ));
-
   if (toggleEditMode) {
     return (
       <li key={todo.id}>
         <form onSubmit={handleSubmit(handleEditSubmit)}>
-          {EDIT_MODE_INPUTS}
+          <div>
+            <Input formId={FormIds.TITLE_VALUE} formRegister={register} />
+            <TextArea formId={FormIds.CONTENTS_VALUE} formRegister={register} />
+          </div>
           <div>{EDIT_MODE_BUTTONS}</div>
         </form>
       </li>

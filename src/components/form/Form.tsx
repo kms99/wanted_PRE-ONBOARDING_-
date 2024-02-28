@@ -2,11 +2,11 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { InputValue, Inputs } from '../../types/types';
-import { FORM_INPUTS } from './constants';
 import Button from '../common/button/Button';
 import { FormIds } from '../../types/enums';
 import useTodo from '../../hooks/useTodo';
 import { inputValidationCheck } from '../../utils';
+import TextArea from '../common/textarea/TextArea';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -45,15 +45,6 @@ export default function Form() {
     },
   ];
 
-  const INPUTS = FORM_INPUTS.map((input) => (
-    <Input
-      key={input.formId}
-      formRegister={register}
-      placeholder={input.placeholder}
-      formId={input.formId}
-    />
-  ));
-
   const BUTTONS = FORM_BUTTONS.map((button) => (
     <Button
       key={`button_${button.text}`}
@@ -65,7 +56,18 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(handleTodoSubmit)}>
-      {INPUTS}
+      <div>
+        <Input
+          formId={FormIds.TITLE_VALUE}
+          formRegister={register}
+          placeholder="title"
+        />
+        <TextArea
+          formId={FormIds.CONTENTS_VALUE}
+          formRegister={register}
+          placeholder="contents"
+        />
+      </div>
       <div>{BUTTONS}</div>
     </form>
   );

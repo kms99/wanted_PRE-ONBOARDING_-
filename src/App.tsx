@@ -6,7 +6,7 @@ import { SectionType } from './types/enums';
 function App() {
   return (
     <div>
-      <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
+      <h1>WANTED PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
       <Form />
       <List sectionInfo={SectionType.DONE} />
       <List sectionInfo={SectionType.NOT_DONE} />
