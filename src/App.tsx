@@ -3,15 +3,16 @@ import Form from './components/form/Form';
 import List from './components/list/List';
 import Nav from './components/nav/Nav';
 import Header from './components/header/Header';
+import * as St from './app.styled';
 
 function App() {
   return (
-    <div>
+    <St.Container>
       <Header />
       <Form />
       <Nav />
       <List />
-    </div>
+    </St.Container>
   );
 }
 

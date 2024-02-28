@@ -24,6 +24,15 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    html{
+        font-size: 62.5%;
+    }
+    html,body{
+        height: 100%;
+    }
+    button,input{
+        font-size: inherit;
+    }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 
     footer, header, hgroup, menu, nav, section {
@@ -50,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
     textarea{
         resize: none;
         font-family: inherit;
+        font-size: inherit;
     }
 `;
 
