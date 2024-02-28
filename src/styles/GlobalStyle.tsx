@@ -61,6 +61,13 @@ const GlobalStyle = createGlobalStyle`
         font-family: inherit;
         font-size: inherit;
     }
+
+    :root{
+       --color-black : #000000;
+       --color-white : #ffffff;
+       --primary-color: ${(props) => props.theme.primary};
+       --sub-color: ${(props) => props.theme.sub};;
+    }
 `;
 
 export default GlobalStyle;
