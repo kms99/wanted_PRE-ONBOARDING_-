@@ -1,6 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    :root{
+       --color-black : #000000;
+       --color-white : #ffffff;
+       --primary-color: ${(props) => props.theme.primary};
+       --sub-color: ${(props) => props.theme.sub};
+       --sub-text-color: ${(props) => props.theme.subText};
+       --nav-bg-color: ${(props) => props.theme.nav};
+    }
+
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -40,6 +49,8 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
+        background: var(--primary-color);
+        color: var(--sub-text-color);
     }
     ol, ul {
         list-style: none;
@@ -60,13 +71,6 @@ const GlobalStyle = createGlobalStyle`
         resize: none;
         font-family: inherit;
         font-size: inherit;
-    }
-
-    :root{
-       --color-black : #000000;
-       --color-white : #ffffff;
-       --primary-color: ${(props) => props.theme.primary};
-       --sub-color: ${(props) => props.theme.sub};;
     }
 `;
 

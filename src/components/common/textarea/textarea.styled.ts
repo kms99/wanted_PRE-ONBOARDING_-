@@ -8,4 +8,5 @@ export const CommonTextarea = styled.textarea`
   color: var(--color-black);
   border: 1px solid var(--sub-color);
   padding: 0.2rem 0.5rem;
+  color: inherit;
 `;

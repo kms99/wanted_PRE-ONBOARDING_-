@@ -6,7 +6,10 @@ export interface themeInitialState {
 }
 
 const initialState: themeInitialState = {
-  themeMode: ThemeType.light,
+  themeMode:
+    localStorage.getItem('todo-theme') === 'dark'
+      ? ThemeType.dark
+      : ThemeType.light,
 };
 
 export const themeSlice = createSlice({
@@ -15,6 +18,7 @@ export const themeSlice = createSlice({
   reducers: {
     toggleTheme: (state) => {
       state.themeMode = state.themeMode ? ThemeType.dark : ThemeType.light;
+      localStorage.setItem('todo-theme', state.themeMode ? 'light' : 'dark');
     },
   },
 });

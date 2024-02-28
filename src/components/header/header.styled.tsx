@@ -14,6 +14,7 @@ export const HeaderContainer = styled.header`
     background: none;
     border: none;
     cursor: pointer;
+    color: inherit;
   }
   & > h1 {
     position: absolute;
@@ -47,7 +48,7 @@ export const HeaderDateArea = styled.div`
       color: var(--sub-color);
       font-size: 6rem;
       margin-right: 1rem;
-
+      font-weight: bold;
       @media screen and (max-width: 500px) {
         font-size: 5rem;
       }
@@ -59,6 +60,10 @@ export const HeaderDateArea = styled.div`
       display: flex;
       flex-direction: column;
     }
+  }
+
+  & > div:last-child {
+    font-weight: bold;
   }
   @media screen and (max-width: 500px) {
     font-size: 2rem;

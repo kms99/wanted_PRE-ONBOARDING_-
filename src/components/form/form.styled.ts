@@ -39,7 +39,9 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
   transform: translateX(
     ${(props) => (props.$isOpen ? 'calc(-50% - 2rem)' : '0')}
   );
-  transition: 0.5s ease-in-out;
+  transition:
+    left 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,6 +51,7 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
   font-size: 2.5rem;
   min-width: 12rem;
   padding: 0;
+  color: inherit;
 
   @media screen and (max-width: 400px) {
     font-size: 2rem;

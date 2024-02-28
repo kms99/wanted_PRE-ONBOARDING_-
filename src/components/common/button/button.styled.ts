@@ -30,7 +30,7 @@ export const CommonButton = styled.button<{ $style: ButtonStyle }>`
   ${(props) =>
     props.$style === ButtonStyle.NAV &&
     `
-    background: #dfe4ea;
+    background: var(--nav-bg-color);
     color: var(--sub-color);
     border:none;
     border-radius: unset;

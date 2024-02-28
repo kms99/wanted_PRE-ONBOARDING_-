@@ -52,13 +52,13 @@ export default function Card({ todo }: Props) {
   const CARD_BUTTONS_INFO = [
     {
       id: `${todo.id}_edit`,
-      text: 'edit',
+      text: 'Edit',
       handler: handleToggleEditMode,
       style: ButtonStyle.EMPTY,
     },
     {
       id: `${todo.id}_delete`,
-      text: 'delete',
+      text: 'Delete',
       handler: () => handleDeleteTodo(todo.id),
       style: ButtonStyle.EMPTY,
     },
