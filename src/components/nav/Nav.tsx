@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useRTK';
 import { NavType } from '../../types/types';
 import { changNav } from '../../store/slice/navSlice';
 import { ButtonStyle } from '../../types/enums';
+import * as St from './nav.styled';
 
 export default function Nav() {
   const dispatch = useAppDispatch();
@@ -37,8 +38,8 @@ export default function Nav() {
   ));
 
   return (
-    <nav>
-      <ul>{NAV_BUTTON_ITEMS}</ul>
-    </nav>
+    <St.Nav>
+      <St.NavUl>{NAV_BUTTON_ITEMS}</St.NavUl>
+    </St.Nav>
   );
 }

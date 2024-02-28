@@ -47,6 +47,7 @@ export const CommonButton = styled.button<{ $style: ButtonStyle }>`
     color: var(--sub-color);
     border-color: var(--sub-color);
     border-bottom:none;
+    border-radius: 3px 3px 0 0;
 
   `}
 `;
