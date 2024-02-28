@@ -47,5 +47,13 @@ export const CardItem = styled.li`
     & > button + button {
       margin-left: 0.5rem;
     }
+    & > button {
+      @media screen and (max-width: 400px) {
+        font-size: 1.5rem;
+      }
+      @media screen and (max-width: 300px) {
+        font-size: 0.6rem;
+      }
+    }
   }
 `;

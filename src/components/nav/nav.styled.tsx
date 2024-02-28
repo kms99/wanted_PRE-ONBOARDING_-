@@ -12,6 +12,12 @@ export const NavUl = styled.ul`
 
     & > button {
       width: 100%;
+      @media screen and (max-width: 400px) {
+        font-size: 1.2rem;
+      }
+      @media screen and (max-width: 300px) {
+        font-size: 0.7rem;
+      }
     }
   }
 `;

@@ -11,7 +11,6 @@ export const Form = styled.form<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background: red; */
 
   max-height: ${(props) => (props.$isOpen ? '300px' : '0px')};
   overflow-y: hidden;
@@ -27,6 +26,10 @@ export const Form = styled.form<{ $isOpen: boolean }>`
   & > textarea {
     height: 200px;
     margin-bottom: 1rem;
+  }
+
+  & > div > button + button {
+    margin-left: 1rem;
   }
 `;
 
@@ -47,6 +50,15 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
   min-width: 12rem;
   padding: 0;
 
+  @media screen and (max-width: 400px) {
+    font-size: 2rem;
+    min-width: 4rem;
+  }
+  @media screen and (max-width: 300px) {
+    font-size: 1rem;
+    min-width: 6rem;
+  }
+
   & > div {
     position: relative;
     width: 2rem;
@@ -55,6 +67,10 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
     background: var(--sub-color);
     padding: 1.5rem;
     border-radius: 50%;
+    @media screen and (max-width: 400px) {
+      margin-right: 0.5rem;
+      padding: 0.8rem;
+    }
   }
 
   & > div::before {
@@ -66,6 +82,11 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
     width: 2rem;
     height: 5px;
     background: var(--color-white);
+
+    @media screen and (max-width: 400px) {
+      width: 1rem;
+      height: 2px;
+    }
   }
 
   & > div::after {
@@ -78,9 +99,21 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
     transition: 0.5s;
     height: 5px;
     background: var(--color-white);
+
+    @media screen and (max-width: 400px) {
+      width: 1rem;
+      height: 2px;
+    }
   }
 
   & > span {
     width: 8.5rem;
+
+    @media screen and (max-width: 400px) {
+      width: 7rem;
+    }
+    @media screen and (max-width: 300px) {
+      width: 4rem;
+    }
   }
 `;

@@ -15,7 +15,10 @@ export const HeaderContainer = styled.header`
     font-weight: bold;
 
     @media screen and (max-width: 500px) {
-      font-size: 1rem;
+      font-size: 0.8rem;
+    }
+    @media screen and (max-width: 300px) {
+      font-size: 0.5rem;
     }
   }
 `;
@@ -35,10 +38,23 @@ export const HeaderDateArea = styled.div`
       color: var(--sub-color);
       font-size: 6rem;
       margin-right: 1rem;
+
+      @media screen and (max-width: 500px) {
+        font-size: 5rem;
+      }
+      @media screen and (max-width: 300px) {
+        font-size: 3rem;
+      }
     }
     & > div :last-child {
       display: flex;
       flex-direction: column;
     }
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 300px) {
+    font-size: 1rem;
   }
 `;
