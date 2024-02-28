@@ -2,6 +2,7 @@ import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { FormIds } from '../../../types/enums';
 import { Inputs } from '../../../types/types';
+import * as St from './input.styled';
 
 interface Props {
   formRegister: UseFormRegister<Inputs>;
@@ -10,5 +11,5 @@ interface Props {
 }
 
 export default function Input({ formRegister, formId, placeholder }: Props) {
-  return <input placeholder={placeholder} {...formRegister(formId)} />;
+  return <St.CommonInput placeholder={placeholder} {...formRegister(formId)} />;
 }

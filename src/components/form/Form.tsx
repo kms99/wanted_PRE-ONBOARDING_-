@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { InputValue, Inputs } from '../../types/types';
@@ -12,8 +12,8 @@ import * as St from './form.styled';
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const { handleAddTodo } = useTodo();
-
   const [toggleForm, setToggleForm] = useState<boolean>(false);
+  const [buttonMessage, setButtonMessage] = useState<string>('Open');
 
   const handleReset = () => {
     reset({
@@ -40,6 +40,10 @@ export default function Form() {
     setToggleForm((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    setTimeout(() => setButtonMessage(toggleForm ? 'CLOSE' : 'ADD'), 450);
+  }, [toggleForm]);
+
   const FORM_BUTTONS = [
     {
       text: 'ADD',
@@ -62,11 +66,13 @@ export default function Form() {
   ));
 
   return (
-    <>
-      <St.FormContainer
-        onSubmit={handleSubmit(handleTodoSubmit)}
-        $isOpen={toggleForm}
-      >
+    <St.FormContainer>
+      <St.ToggleButton onClick={handleToggleForm} $isOpen={toggleForm}>
+        <div />
+        <span>{buttonMessage}</span>
+      </St.ToggleButton>
+
+      <St.Form onSubmit={handleSubmit(handleTodoSubmit)} $isOpen={toggleForm}>
         <Input
           formId={FormIds.TITLE_VALUE}
           formRegister={register}
@@ -78,8 +84,7 @@ export default function Form() {
           placeholder="contents"
         />
         <div>{BUTTONS}</div>
-      </St.FormContainer>
-      <Button isSubmit={false} text="+" handler={handleToggleForm} />
-    </>
+      </St.Form>
+    </St.FormContainer>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { FormIds } from '../../../types/enums';
 import { Inputs } from '../../../types/types';
+import * as St from './textarea.styled';
 
 interface Props {
   formRegister: UseFormRegister<Inputs>;
@@ -10,5 +11,7 @@ interface Props {
 }
 
 export default function TextArea({ formRegister, formId, placeholder }: Props) {
-  return <textarea placeholder={placeholder} {...formRegister(formId)} />;
+  return (
+    <St.CommonTextarea placeholder={placeholder} {...formRegister(formId)} />
+  );
 }
