@@ -1,3 +1,5 @@
 import todoSlice from './todoSlice';
+import navSlice from './navSlice';
+import themeSlice from './themeSlice';
 
-export { todoSlice };
+export { todoSlice, navSlice, themeSlice };

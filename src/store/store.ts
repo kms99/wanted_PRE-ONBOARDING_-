@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { todoSlice } from './slice';
+import { todoSlice, navSlice, themeSlice } from './slice';
 
 export const store = configureStore({
-  reducer: { todoSlice },
+  reducer: { todoSlice, navSlice, themeSlice },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,35 +1,18 @@
 import React from 'react';
+import Form from './components/form/Form';
+import List from './components/list/List';
+import Nav from './components/nav/Nav';
+import Header from './components/header/Header';
+import * as St from './app.styled';
 
 function App() {
   return (
-    <div>
-      <h1>원티드 PRE-ONBOARDING PRE-MISSION - TODO LIST</h1>
-
-      <form>
-        <input />
-        <input />
-        <button>초기화</button>
-        <button>입력</button>
-      </form>
-
-      <section>
-        <h2>NOT DONE</h2>
-        <ul>
-          <li>
-            <h2>카드겠지?</h2>
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>DONE</h2>
-        <ul>
-          <li>
-            <h2>카드겠지?</h2>
-          </li>
-        </ul>
-      </section>
-    </div>
+    <St.Container>
+      <Header />
+      <Form />
+      <Nav />
+      <List />
+    </St.Container>
   );
 }
 

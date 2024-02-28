@@ -8,8 +8,8 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "prettier",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier"
   ],
   "plugins": ["@typescript-eslint", "react", "jsx-a11y", "import", "prettier"],
   "parser": "@typescript-eslint/parser",
@@ -22,15 +22,15 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "indent": ["error", 2],
+    "indent": "off",
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off", // 기본 JavaScript 규칙 비활성화
+    "@typescript-eslint/no-unused-vars": "warn", // TypeScript에 맞는 규칙 활성화
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "endOfLine": "auto"
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "settings": {
     "react": {
