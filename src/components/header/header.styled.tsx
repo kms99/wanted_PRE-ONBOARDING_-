@@ -6,6 +6,15 @@ export const HeaderContainer = styled.header`
   width: 100%;
   height: 15rem;
 
+  & > button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: unset;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
   & > h1 {
     position: absolute;
     top: 0;

@@ -16,6 +16,4 @@ type UpdateValue = Omit<Todo, 'isDone'>;
 
 type NavType = 'ALL' | 'DONE' | 'NOT_DONE';
 
-type ThemeType = 'dark' | 'light';
-
-export type { Inputs, Todo, InputValue, UpdateValue, NavType, ThemeType };
+export type { Inputs, Todo, InputValue, UpdateValue, NavType };
