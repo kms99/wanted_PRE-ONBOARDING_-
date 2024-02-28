@@ -2,5 +2,10 @@ enum FormIds {
   TITLE_VALUE = 'titleValue',
   CONTENTS_VALUE = 'contentsValue',
 }
-
-export { FormIds };
+enum ButtonStyle {
+  'EMPTY',
+  'FILL',
+  'NAV',
+  'ACTIVE_NAV',
+}
+export { FormIds, ButtonStyle };

@@ -8,6 +8,7 @@ import useTodo from '../../hooks/useTodo';
 import { inputValidationCheck } from '../../utils';
 import TextArea from '../common/textarea/TextArea';
 import * as St from './form.styled';
+import { ButtonStyle } from '../../types/enums';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -46,13 +47,15 @@ export default function Form() {
 
   const FORM_BUTTONS = [
     {
-      text: 'ADD',
-      isSubmit: true,
-    },
-    {
       text: 'RESET',
       handler: handleReset,
       isSubmit: false,
+      style: ButtonStyle.EMPTY,
+    },
+    {
+      text: 'ADD',
+      isSubmit: true,
+      style: ButtonStyle.FILL,
     },
   ];
 
@@ -62,6 +65,7 @@ export default function Form() {
       text={button.text}
       handler={button.handler}
       isSubmit={button.isSubmit}
+      btnStyle={button.style}
     />
   ));
 

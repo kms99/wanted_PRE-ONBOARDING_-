@@ -1,25 +1,38 @@
 import React from 'react';
 import Button from '../common/button/Button';
-import { useAppDispatch } from '../../hooks/useRTK';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRTK';
 import { NavType } from '../../types/types';
 import { changNav } from '../../store/slice/navSlice';
+import { ButtonStyle } from '../../types/enums';
 
 export default function Nav() {
   const dispatch = useAppDispatch();
+  const currentNav = useAppSelector((state) => state.navSlice.currentNav);
 
   const handleChangeNav = (nav: NavType) => {
     dispatch(changNav(nav));
   };
 
   const BUTTONS_INFO = [
-    { text: 'ALL', handler: () => handleChangeNav('ALL') },
-    { text: 'NOT DONE', handler: () => handleChangeNav('NOT_DONE') },
-    { text: 'DONE', handler: () => handleChangeNav('DONE') },
+    { type: 'ALL', text: 'ALL', handler: () => handleChangeNav('ALL') },
+    {
+      type: 'NOT_DONE',
+      text: 'NOT DONE',
+      handler: () => handleChangeNav('NOT_DONE'),
+    },
+    { type: 'DONE', text: 'DONE', handler: () => handleChangeNav('DONE') },
   ];
 
   const NAV_BUTTON_ITEMS = BUTTONS_INFO.map((button) => (
     <li key={button.text}>
-      <Button isSubmit={false} text={button.text} handler={button.handler} />
+      <Button
+        isSubmit={false}
+        text={button.text}
+        handler={button.handler}
+        btnStyle={
+          button.type === currentNav ? ButtonStyle.ACTIVE_NAV : ButtonStyle.NAV
+        }
+      />
     </li>
   ));
 
