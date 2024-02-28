@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Input from '../common/input/Input';
 import { InputValue, Inputs } from '../../types/types';
@@ -7,10 +7,13 @@ import { FormIds } from '../../types/enums';
 import useTodo from '../../hooks/useTodo';
 import { inputValidationCheck } from '../../utils';
 import TextArea from '../common/textarea/TextArea';
+import * as St from './form.styled';
 
 export default function Form() {
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const { handleAddTodo } = useTodo();
+
+  const [toggleForm, setToggleForm] = useState<boolean>(false);
 
   const handleReset = () => {
     reset({
@@ -31,6 +34,10 @@ export default function Form() {
 
   const handleTodoSubmit: SubmitHandler<Inputs> = (value) => {
     handleAdd({ title: value.titleValue, contents: value.contentsValue });
+  };
+
+  const handleToggleForm = () => {
+    setToggleForm((prevState) => !prevState);
   };
 
   const FORM_BUTTONS = [
@@ -55,8 +62,11 @@ export default function Form() {
   ));
 
   return (
-    <form onSubmit={handleSubmit(handleTodoSubmit)}>
-      <div>
+    <>
+      <St.FormContainer
+        onSubmit={handleSubmit(handleTodoSubmit)}
+        $isOpen={toggleForm}
+      >
         <Input
           formId={FormIds.TITLE_VALUE}
           formRegister={register}
@@ -67,8 +77,9 @@ export default function Form() {
           formRegister={register}
           placeholder="contents"
         />
-      </div>
-      <div>{BUTTONS}</div>
-    </form>
+        <div>{BUTTONS}</div>
+      </St.FormContainer>
+      <Button isSubmit={false} text="+" handler={handleToggleForm} />
+    </>
   );
 }

@@ -6,8 +6,6 @@ export const HeaderContainer = styled.header`
   width: 100%;
   height: 15rem;
 
-  background: red;
-
   & > h1 {
     position: absolute;
     top: 0;
