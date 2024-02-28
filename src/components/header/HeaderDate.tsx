@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import * as St from './header.styled';
+import { DAY, MONTH } from '../../constants';
 
 export default function HeaderDate() {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
@@ -25,15 +27,19 @@ export default function HeaderDate() {
   }, []);
 
   return (
-    <div>
+    <St.HeaderDateArea>
       <div>
-        <div>{currentDate.getDate()}</div>
         <div>
-          <span>{currentDate.getMonth() + 1}</span>
+          <span>{currentDate.getDate()}</span>
+        </div>
+        <div>
+          <span>{MONTH[currentDate.getMonth() + 1]}</span>
           <span>{currentDate.getFullYear()}</span>
         </div>
       </div>
-      <div>{currentDate.getDay()}</div>
-    </div>
+      <div>
+        <span>{DAY[currentDate.getDay()]}</span>
+      </div>
+    </St.HeaderDateArea>
   );
 }

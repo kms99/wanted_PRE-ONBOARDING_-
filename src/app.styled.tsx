@@ -4,6 +4,8 @@ export const Container = styled.div`
   max-width: 100rem;
   min-height: 100vh;
 
+  padding: 5rem;
+
   background: green;
 
   display: flex;
