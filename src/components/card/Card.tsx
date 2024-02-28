@@ -7,6 +7,7 @@ import Input from '../common/input/Input';
 import { ButtonStyle, FormIds } from '../../types/enums';
 import { inputValidationCheck } from '../../utils';
 import TextArea from '../common/textarea/TextArea';
+import * as St from './card.styled';
 
 interface Props {
   todo: Todo;
@@ -50,10 +51,10 @@ export default function Card({ todo }: Props) {
 
   const CARD_BUTTONS_INFO = [
     {
-      id: `${todo.id}_isDone`,
-      text: todo.isDone ? 'Cancel Done' : 'Done',
-      handler: () => handleUpdateTodo(todo.id),
-      style: ButtonStyle.FILL,
+      id: `${todo.id}_edit`,
+      text: 'edit',
+      handler: handleToggleEditMode,
+      style: ButtonStyle.EMPTY,
     },
     {
       id: `${todo.id}_delete`,
@@ -62,26 +63,26 @@ export default function Card({ todo }: Props) {
       style: ButtonStyle.EMPTY,
     },
     {
-      id: `${todo.id}_edit`,
-      text: 'edit',
-      handler: handleToggleEditMode,
-      style: ButtonStyle.EMPTY,
+      id: `${todo.id}_isDone`,
+      text: todo.isDone ? 'Cancel Done' : 'Done',
+      handler: () => handleUpdateTodo(todo.id),
+      style: ButtonStyle.FILL,
     },
   ];
 
   const CARD_EDIT_MODE_BUTTONS_INFO = [
-    {
-      isSubmit: true,
-      id: `${todo.id}_editSave`,
-      text: 'Save',
-      style: ButtonStyle.FILL,
-    },
     {
       isSubmit: false,
       id: `${todo.id}_editCancel`,
       text: 'Cancel',
       handler: handleToggleEditMode,
       style: ButtonStyle.EMPTY,
+    },
+    {
+      isSubmit: true,
+      id: `${todo.id}_editSave`,
+      text: 'Save',
+      style: ButtonStyle.FILL,
     },
   ];
 
@@ -107,23 +108,21 @@ export default function Card({ todo }: Props) {
 
   if (toggleEditMode) {
     return (
-      <li key={todo.id}>
+      <St.CardItem key={todo.id}>
         <form onSubmit={handleSubmit(handleEditSubmit)}>
-          <div>
-            <Input formId={FormIds.TITLE_VALUE} formRegister={register} />
-            <TextArea formId={FormIds.CONTENTS_VALUE} formRegister={register} />
-          </div>
+          <Input formId={FormIds.TITLE_VALUE} formRegister={register} />
+          <TextArea formId={FormIds.CONTENTS_VALUE} formRegister={register} />
           <div>{EDIT_MODE_BUTTONS}</div>
         </form>
-      </li>
+      </St.CardItem>
     );
   } else {
     return (
-      <li key={todo.id}>
+      <St.CardItem key={todo.id}>
         <h2>{todo.title}</h2>
         <p>{todo.contents}</p>
         <div>{NOT_EDIT_MODE_BUTTONS}</div>
-      </li>
+      </St.CardItem>
     );
   }
 }

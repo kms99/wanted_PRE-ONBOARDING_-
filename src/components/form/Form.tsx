@@ -80,7 +80,7 @@ export default function Form() {
         <Input
           formId={FormIds.TITLE_VALUE}
           formRegister={register}
-          placeholder="title"
+          placeholder="title (1~12)"
         />
         <TextArea
           formId={FormIds.CONTENTS_VALUE}

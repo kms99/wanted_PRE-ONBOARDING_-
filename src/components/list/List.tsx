@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../card/Card';
 import useTodo from '../../hooks/useTodo';
 import { useAppSelector } from '../../hooks/useRTK';
+import * as St from './list.styled';
 
 export default function List() {
   const { todos } = useTodo();
@@ -25,8 +26,8 @@ export default function List() {
   const NOT_TODO_MESSAGE = <h2>{'h1'}</h2>;
 
   return (
-    <section>
-      {TODO_CARD.length ? <ul>{TODO_CARD}</ul> : NOT_TODO_MESSAGE}
-    </section>
+    <St.ListContainer>
+      {TODO_CARD.length ? <St.List>{TODO_CARD}</St.List> : NOT_TODO_MESSAGE}
+    </St.ListContainer>
   );
 }

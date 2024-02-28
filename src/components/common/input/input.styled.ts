@@ -9,4 +9,5 @@ export const CommonInput = styled.input`
   color: var(--color-black);
   border-bottom: 1px solid var(--sub-color);
   padding: 0.2rem 0.5rem;
+  font-family: inherit;
 `;

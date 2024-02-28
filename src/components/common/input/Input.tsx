@@ -11,5 +11,11 @@ interface Props {
 }
 
 export default function Input({ formRegister, formId, placeholder }: Props) {
-  return <St.CommonInput placeholder={placeholder} {...formRegister(formId)} />;
+  return (
+    <St.CommonInput
+      maxLength={12}
+      placeholder={placeholder}
+      {...formRegister(formId, { maxLength: 12 })}
+    />
+  );
 }

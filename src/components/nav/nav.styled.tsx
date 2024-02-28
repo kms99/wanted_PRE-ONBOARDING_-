@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const Nav = styled.nav`
-  margin-top: 5rem;
+  margin: 5rem 0 2rem 0;
   width: 100%;
 `;
 export const NavUl = styled.ul`
