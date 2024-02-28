@@ -1,35 +1,28 @@
 import React from 'react';
-import { SectionType } from '../../types/enums';
 import Card from '../card/Card';
 import useTodo from '../../hooks/useTodo';
-
-interface Props {
-  sectionInfo: SectionType;
-}
+import { useAppSelector } from '../../hooks/useRTK';
 
 export default function List() {
   const { todos } = useTodo();
+  const currentNav = useAppSelector((state) => state.navSlice.currentNav);
 
   const TODO_CARD = todos
     .filter((todo) => {
-      switch (sectionInfo) {
-        case 0:
+      switch (currentNav) {
+        case 'ALL':
           return true;
-        case 1:
-          return true;
+        case 'DONE':
+          return todo.isDone;
+        case 'NOT_DONE':
+          return !todo.isDone;
         default:
           return true;
       }
     })
     .map((todo) => <Card key={todo.id} todo={todo} />);
 
-  const NOT_TODO_MESSAGE = (
-    <h2>
-      {sectionInfo
-        ? 'Please complete todays tasks'
-        : 'Please register todays tasks'}
-    </h2>
-  );
+  const NOT_TODO_MESSAGE = <h2>{'h1'}</h2>;
 
   return (
     <section>
